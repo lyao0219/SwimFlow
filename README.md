@@ -64,7 +64,7 @@ To get started, either clone this repository, or if you stay within github, use 
 ```
 
 Then, you need to download from [here](https://drive.google.com/file/d/1Wj2BNrbZehLB6RI_cpLnUtpAkrFS9y0z/view?usp=sharing), our swimming video, which is a **mandatory** component to let *SwimFlow* work properly. 
-Please put the downloaded video under the folder /SwimFlow/video and **name it as follows**</span>**:
+Please put the downloaded video under the folder /SwimFlow/video and **name it as follows**:
 
 ```
 └── Main directory
