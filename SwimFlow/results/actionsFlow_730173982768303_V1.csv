@@ -1,0 +1,3 @@
+timestamp, participantId, designVersion, elementId, videoCurrentTime, currentFrameId, videoPlayStatus
+2023-12-27T17:33:29+0100,730173982768303,1,finishDesignBtn,18.422487,921,pause
+2023-12-27T17:33:34+0100,730173982768303,1,,18.422487,921,pause

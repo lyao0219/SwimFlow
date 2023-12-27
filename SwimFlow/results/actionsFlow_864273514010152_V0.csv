@@ -1,0 +1,4 @@
+timestamp, participantId, designVersion, elementId, videoCurrentTime, currentFrameId, videoPlayStatus
+2023-12-27T15:10:34+0100,864273514010152,0,playPauseButton,0,0,pause
+2023-12-27T15:10:35+0100,864273514010152,0,playPauseButton,0,0,pause
+2023-12-27T15:10:36+0100,864273514010152,0,myProgressBar,18.367206,918,pause

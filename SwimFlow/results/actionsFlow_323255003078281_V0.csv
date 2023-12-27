@@ -1,0 +1,6 @@
+timestamp, participantId, designVersion, elementId, videoCurrentTime, currentFrameId, videoPlayStatus
+2023-12-27T15:18:35+0100,323255003078281,0,playPauseButton,0,0,pause
+2023-12-27T15:18:36+0100,323255003078281,0,playPauseButton,0,0,pause
+2023-12-27T15:18:37+0100,323255003078281,0,,0,0,pause
+2023-12-27T15:18:38+0100,323255003078281,0,,0,0,pause
+2023-12-27T15:18:38+0100,323255003078281,0,visBtn_1,0,0,pause

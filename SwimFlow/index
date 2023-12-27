@@ -1,0 +1,661 @@
+<!-- Static mode -->
+<!-- 1. remove the autoplay = "true" -->
+<!-- 2. hide the video controller div "myVideoControllers" -->
+
+<!DOCTYPE html>
+
+<html>
+	<script type="text/javascript" src = "js/loading.js"></script>
+
+	<head>
+		<!-- main.css -->
+		<link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
+		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+		<link rel = "stylesheet" href = "css/all.css" />
+		<link rel = "stylesheet" href = "css/mystyle.css" />
+
+		<!-- Jquery -->
+		<script src = "js/lib/jquery-3.6.0.min.js"></script>
+		<!-- Jquery-csv -->
+		<script src = "js/lib/jquery-csv.js"></script>
+		<!-- Lodash -->
+		<script src = "js/lib/lodash.js"></script>
+		<!-- select2 -->
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+
+		<!-- D3.js -->
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+		<title>
+			Swimming visualization prototype
+		</title>
+	</head>
+
+	<body>
+		<!-- left part: controllers -->
+		<div id = "controllers" class = "myBorder" style="padding: 0px; margin: 0px;">
+			<!-- 4.1 Undo -->
+			<div id = "controllerHeader" class = "controllerHeader">
+				<div id = "undo" class = "footButtons" style = "float: left; padding: 0px; position: relative;">
+					<button type = "button" class = "undoRedo footerButton" id = "undoBtn" title="Undo" disabled onclick="undoRedo(true, false)">
+						<img id = "undoImg" class = "footerButtonImg" src = "/SwimFlow/img/png/interface/undo_8eccea.png">
+					</button>				
+				</div>
+				<!-- 4.2 Redo -->
+				<div id = "Redo" class = "footButtons" style = "float: left; padding: 0px; margin-left: 2px; position: relative;">
+					<button type = "button" class = "undoRedo footerButton" id = "redoBtn" title="Redo" disabled onclick="undoRedo(false, true)">
+						<img id = "redoImg" class = "footerButtonImg" src = "/SwimFlow/img/png/interface/redo_8eccea.png">
+					</button>				
+				</div>
+			</div>
+
+			<div name = "dataCard" class = "data_card" id = "data_card_1">
+				<div name = "dataCardContent" class = "data_card_content" id = "data_card_content_1">
+					
+					<!-- Setup -->
+					<div class = "title1" id = "setupTitle">
+						Setup:
+					</div>
+					<!-- S1: select a data item -->
+					<div id = "data_category">
+						<lable for = "dataCategory_selector" class = "title2">DATA:</lable><br>
+						<select class = "selector" id = "dataCategory_selector">
+							<option disabled selected value = "default" class = "content1">--Please select an option--</option>
+							<optgroup label = "Swimmer's metadata">
+								<option value = "nationality" data-img_src="/SwimFlow/img/png/donuts/nationality.png">Nationality</option>
+								<option value = "name" data-img_src="/SwimFlow/img/png/donuts/name.png">Name</option>
+								<option value = "age" data-img_src="/SwimFlow/img/png/donuts/age.png">Age</option>
+							</optgroup>
+							<optgroup label = "Time-related Data">
+								<option value = "time_differences_record" data-img_src="/SwimFlow/img/png/donuts/time_differences_record.png" title = "The Olympics defines a lap as one length of the pool. A lap time is the time taken to complete a lap or length of the pool within a swimming race.">Lap Time Differences to A Record</option>
+								<option value = "time_differences_swimmer" data-img_src="/SwimFlow/img/png/donuts/time_differences_swimmer.png" title = "The Olympics defines a lap as one length of the pool. A lap time is the time taken to complete a lap or length of the pool within a swimming race.">Lap Time Differences to Another Swimmer</option>
+								<option value = "elapsed" data-img_src="/SwimFlow/img/png/donuts/elapsed.png" title = "An elapsed time is the time taken from the begining of the race.">Elapsed Time</option>
+								<option value = "current_lap" data-img_src="/SwimFlow/img/png/donuts/current_lap.png" title = "The Olympics defines a lap as one length of the pool. A lap time is the time taken to complete a lap or length of the pool within a swimming race. An estimated lap time is how long time a swimmer will take to complete one lap at the current pace.">Estimated Lap Time</option>
+								<option value = "average_lap" data-img_src="/SwimFlow/img/png/donuts/average_lap.png" title = "The Olympics defines a lap as one length of the pool. A lap time is the time taken to complete a lap or length of the pool within a swimming race. An average lap time is the average of lap times within a race.">Average Lap Time</option>
+							</optgroup>
+							<optgroup label = "Speed-related Data">
+								<option value = "current_speed" data-img_src="/SwimFlow/img/png/donuts/current_speed.png">Current Speed</option>
+								<option value = "speed_differences_swimmer" data-img_src="/SwimFlow/img/png/donuts/speed_differences_swimmer.png">Speed Differences to Another Swimmer</option>
+								<option value = "speed_differences_record" data-img_src="/SwimFlow/img/png/donuts/speed_differences_record.png">Speed Differences to A Record</option>
+								<option value = "acceleration" data-img_src="/SwimFlow/img/png/donuts/acceleration.png" title = "Acceleration shows when a swimmer slows down, speeds up, etc.">Acceleration</option>
+								<!-- <option value = "speed_history" data-img_src="/SwimFlow/img/png/donuts/speed_history.png" title = "A history of speed is a continuous time series data representing the speed changes in the race.">History of Speed</option> -->
+								<option value = "average_speed" data-img_src="/SwimFlow/img/png/donuts/average_speed.png" title = "Current average speed is how fast the average rate is a swimmer swam from the beginning of the race until the present moment. ">Current Average Speed</option>
+							</optgroup>
+							<optgroup label = "Position-related Data">
+								<option value = "position_differences_record" data-img_src = "/SwimFlow/img/png/donuts/position_differences_record.png">Relative Position Differences to A record</option>
+								<option value = "position_differences_swimmer" data-img_src = "/SwimFlow/img/png/donuts/position_differences_swimmer.png">Relative Position Differences to A Swimmer</option>				
+							</optgroup>
+							<optgroup label = "Distance-related Data">
+								<option value = "distance_differences_leader" data-img_src="/SwimFlow/img/png/donuts/distance_differences_leader.png">Distance Differences to Leader</option>
+								<option value = "remaining_distance" data-img_src="/SwimFlow/img/png/donuts/remaining_distance.png">Remaining Distance</option>
+								<option value = "distance_swam" data-img_src="/SwimFlow/img/png/donuts/distance_swam.png">Distance Swam</option>
+							</optgroup>
+							<optgroup label = "Records">
+								<option value = "world_record" data-img_src="/SwimFlow/img/png/donuts/world_record.png">World Record</option>
+								<option value = "olympics_record" data-img_src="/SwimFlow/img/png/donuts/olympics_record.png">Olympics Record</option>
+								<option value = "personal_record" data-img_src="/SwimFlow/img/png/donuts/personal_record.png">Personal Record</option>
+								<option value = "national_record" data-img_src="/SwimFlow/img/png/donuts/national_record.png">National Record</option>
+							</optgroup>
+							<optgroup label = "Predictions">
+								<option value = "record_break" data-img_src="/SwimFlow/img/png/donuts/record_break.png">Will a record be broken?</option>
+								<option value = "winner" data-img_src="/SwimFlow/img/png/donuts/winner.png">Who will win?</option>
+								<option value = "next_passing" data-img_src="/SwimFlow/img/png/donuts/next_passing.png">Where will the next passing take place?</option>
+								<option value = "estimated_completion_time" data-img_src="/SwimFlow/img/png/donuts/estimated_completion_time.png">What is the estimated completion time?</option>
+							</optgroup>
+							<optgroup label = "Swimming Techniques">
+								<option value = "reaction_time" data-img_src="/SwimFlow/img/png/donuts/reaction_time.png" title = "Reaction time is how long time a swimmer took to react to the race-starting signal.">Reaction Time</option>
+								<option value = "diving_distance" data-img_src="/SwimFlow/img/png/donuts/diving_distance.png" title = "Diving distance is how far a swimmer dived from the pool's edge into the water.">Diving Distance</option>
+								<option value = "stroke_distance" data-img_src="/SwimFlow/img/png/donuts/stroke_distance.png" title = "A stroke is one of a set of movements in swimming in which the swimmer moves arm(s) forward and then back.">Distance per Stroke</option>
+								<option value = "stroke_count" data-img_src="/SwimFlow/img/png/donuts/stroke_count.png" title = "A stroke is one of a set of movements in swimming in which the swimmer moves arm(s) forward and then back.">Stroke Count</option>
+							</optgroup>
+						</select>
+					</div>
+
+					<!-- S2: select a representation -->
+					<div id = "vis" hidden>
+						<label for = "divVisContainer" class = "title2">REPRESENTATION:</label>
+						<div id = "divVisContainer" style = "display: block">
+							<!-- insert representations dynamically -->
+						</div>					
+					</div>
+
+					<!-- S3: refine data item -->
+					<div id = "record" hidden>
+						<label for = "record_selector" class = "title2">Record:</label><br>						
+						<select class = "selector textSelector" id = "record_selector">
+							<option value = "world" selected class = "content1">World Record</option>
+							<option value = "olympic" class = "content1">Olympics Record</option>
+							<option value = "national" class = "content1">National Record</option>
+							<option value = "personal" class = "content1">Personal Record</option>							
+						</select>
+					</div>
+
+					<div id = "swimmer" hidden>
+						<label for = "swimmer_selector" class = "title2">Swimmer:</label><br>
+						<select class = "selector textSelector" id = "swimmer_selector">
+							<option value = "lane1" selected>Lane 1</option>
+							<option value = "lane2">Lane 2</option>
+							<option value = "lane3">Lane 3</option>
+							<option value = "lane4">Lane 4</option>
+							<option value = "lane5">Lane 5</option>
+							<option value = "lane6">Lane 6</option>
+							<option value = "lane7">Lane 7</option>
+							<option value = "lane8">Lane 8</option>
+						</select>
+					</div>
+
+					<!-- Representation Position -->
+					<div class = "title1" id = "representationPositionTitle" hidden>
+						Representation Position:
+					</div>
+					<!-- P1. display on which lane (default: selected all) -->
+					<div id = "target_lane" hidden>
+						<label for = "divTargetLanes" class = "title2">DISPLAY ON LANE:</label><br>
+						<div id = "divTargetLanes">
+							<label for = "lane_selector_1" class = "title3">1</label>
+							<input type="checkbox" class = "lane_selector" name="lane_selector" id = "lane_selector_1" value = 1 checked>
+							<label for = "lane_selector_2" class = "title3">2</label> 
+							<input type="checkbox" class = "lane_selector" name="lane_selector" id = "lane_selector_2" value = 2 checked>
+							<label for = "lane_selector_3" class = "title3">3</label>
+							<input type="checkbox" class = "lane_selector" name="lane_selector" id = "lane_selector_3" value = 3 checked>
+							<label for = "lane_selector_4" class = "title3">4</label>
+							<input type="checkbox" class = "lane_selector" name="lane_selector" id = "lane_selector_4" value = 4 checked>
+							<label for = "lane_selector_5" class = "title3">5</label>
+							<input type="checkbox" class = "lane_selector" name="lane_selector" id = "lane_selector_5" value = 5 checked>
+							<label for = "lane_selector_6" class = "title3">6</label>
+							<input type="checkbox" class = "lane_selector" name="lane_selector" id = "lane_selector_6" value = 6 checked>
+							<label for = "lane_selector_7" class = "title3">7</label>
+							<input type="checkbox" class = "lane_selector" name="lane_selector" id = "lane_selector_7" value = 7 checked>
+							<label for = "lane_selector_8" class = "title3">8</label>
+							<input type="checkbox" class = "lane_selector" name="lane_selector" id = "lane_selector_8" value = 8 checked>
+						</div>
+					</div>	
+
+					<!-- P2. movement status (stationary / move with swimmer): check if the data item can be moved -->
+					<div id = "movementStatus" hidden>
+						<label for = "moving" class = "title2">MOVE WITH SWIMMER:</label>
+						<label class = "switch">
+							<input type="checkbox" name="movement_selector" id= "moving" checked>
+							<span class = "slider round"></span>
+						</label>
+					</div>
+
+					<!-- P3.1. when move is active -->
+					<div class = "moveSubControllers" id = "visDistancetoSwimmer" hidden>
+						<!-- 3.1.2. distance to swimmer: behind/in front, up/down, etc -->
+						<div id = "displayPosVisSwimmmer" class= "move-sub-controllers slider-controllers">
+							<div class = "moveSubControllersTitle title2" id = "moveSubControllersTitle_move"> 
+								POSITION RELATIVE TO SWIMMER:
+							</div>
+							<div class = "sliderRow" id = "sliderRow_horizontal">
+								<div class = "sliderLeftLabel" id = "sliderLeftLabel_horizontal">
+									<label for = "horizontal" class = "title4" id = "horizontalLabel_1" >In front</label>
+								</div>
+								<div class = "sliderItself" id = "sliderItself_horizontal">
+									<input type = "range" class = "range_slider re_draw" name = "horizontal" id = "horizontal" step = "0.1" value = "0">
+								</div>
+								<div class = "sliderRightLabel" id = "sliderRightLabel_horizontal">
+									<label for = "horizontal" class = "title4" id = "horizontalLabel_2" >Behind</label>
+								</div>
+								<div class = "sliderResetBtn" id = "sliderFollowBtn_resetHorizontal">
+									<input type = "button" class = "reset_btn title5" id = "reset_horizontal" value = "RESET">
+								</div>
+
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_horizontal_minusBtn">
+									<input type = "button" class = "plusMinus_btn title5 minus" id = "minus_horizontal" value = "-">
+								</div>
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_horizontal_plusBtn">
+									<input type = "button" class = "plusMinus_btn title5 plus" id = "plus_horizontal" value = "+">
+								</div>								
+
+								<div class = "label_btn sliderFlipBtn title5" name = "flipHorizontal" id = "flip_horizontal" title = "Click to flip the vis position after a turn.">
+									FLIP
+								</div>
+							</div>
+
+							<div class = "sliderRow" id = "sliderRow_vertical">
+								<div class = "sliderLeftLabel" id = "sliderLeftLabel_vertical">
+									<label for = "vertical" class = "title4" id = "verticalLabel_1">Up</label>
+								</div>
+								<div class = "sliderItself" id = "sliderItself_vertical">
+									<input type = "range" class = "range_slider re_draw" name = "vertical" id = "vertical" step = "0.1"value = "0">
+								</div>
+								<div class = "sliderRightLabel" id = "sliderRightLabel_vertical">
+									<label for = "vertical" class = "title4" id = "verticalLabel_2">Down</label>
+								</div>
+								<div class = "sliderResetBtn" id = "sliderFollowBtn_resetVertical">
+									<input type = "button" class = "reset_btn title5" id = "reset_vertical" value = "RESET">
+								</div>
+
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_vertical_minusBtn">
+									<input type = "button" class = "plusMinus_btn title5 minus" id = "minus_vertical" value = "-">
+								</div>
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_vertical_plusBtn">
+									<input type = "button" class = "plusMinus_btn title5 plus" id = "plus_vertical" value = "+">
+								</div>								
+
+								<div class = "sliderFlipBtn"></div>
+							</div>
+						</div>
+						
+					</div>
+
+					<!-- P3.2. when move is desactive -->
+					<div class = "moveSubcontrollers" id = "moveSubControllers" hidden>
+						<!-- 3.2.1. align tool -->
+						<div id = "align" class = "move-sub-controllers">
+							<label for = "alignButton" class = "title2">ALIGN:</label>
+							<label class = switch>
+								<input type="checkbox" name="align_selector" id= "alignButton" title = "Click to align elements.">
+								<span class = "slider round"></span>
+							</label>
+						</div>
+
+						<!-- 3.2.2. position -->
+						<div id = "displayPosVisPool" class= "move-sub-controllers slider-controllers">
+							<div class = "moveSubControllersTitle title2" id = "moveSubControllersTitle_move">
+								POSITION RELATIVE TO POOL:
+							</div>
+							<div class = "sliderRow" id = "sliderRow_horizontalSlider">
+								<div class = "label_btn title5 edge_redraw sliderLeftLabel" name = "horizontalSlider" id = "leftEdge" title = "Click to align at the left edge of the swimming pool.">
+									Left
+								</div>
+								<div class = "sliderItself" id = "sliderItself_moveHorizontalSlider">
+									<input type = "range" class = "range_slider move_re_draw" name = "moveHorizontalSlider" id = "moveHorizontalSlider" step = "0.1" value = "0">
+								</div>
+								<div class = "label_btn title5 edge_redraw sliderRightLabel" name = "horizontalSlider" id = "rightEdge" title = "Click to align at the right edge of the swimming pool.">
+									Right
+								</div>
+								<div class = "sliderResetBtn" id = "sliderFollowBtn_resetMoveHorizontal">
+									<input type = "button" class = "reset_btn title5" id = "reset_moveHorizontal" value = "RESET"><br>
+								</div>
+
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_moveHorizontal_minusBtn">
+									<input type = "button" class = "plusMinus_btn title5 minus" id = "minus_moveHorizontal" value = "-">
+								</div>
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_moveHorizontal_plusBtn">
+									<input type = "button" class = "plusMinus_btn title5 plus" id = "plus_moveHorizontal" value = "+">
+								</div>							
+
+								<div class = "sliderFlipBtn"></div>
+							</div>
+
+							<div class = "sliderRow" id = "sliderRow_verticalSlider">
+								<div class = "label_btn title5 edge_redraw sliderLeftLabel" name = "verticalSlider" id = "topEdge" title = "Click to align at the top edge of each lane.">
+									Top
+								</div>
+								<div class = "sliderItself" id = "sliderItself_moveVerticalSlider">
+									<input type = "range" class = "range_slider move_re_draw" name = "moveVerticalSlider" id = "moveVerticalSlider" step = "0.1" value = "0">
+								</div>								
+								<div class = "label_btn title5 edge_redraw sliderRightLabel" name = "verticalSlider" id = "bottomEdge" title = "Click to align at the bottom edge of each lane.">
+									Bottom
+								</div>
+								<div class = "sliderResetBtn" id = "sliderFollowBtn_resetMoveVertical">
+									<input type = "button" class = "reset_btn title5" id = "reset_moveVertical" value = "RESET"><br>
+								</div>
+
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_moveVertical_minusBtn">
+									<input type = "button" class = "plusMinus_btn title5 minus" id = "minus_moveVertical" value = "-">
+								</div>
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_moveVertical_plusBtn">
+									<input type = "button" class = "plusMinus_btn title5 plus" id = "plus_moveVertical" value = "+">
+								</div>								
+
+								<div class = "sliderFlipBtn"></div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Representation design -->
+					<div class = "title1" id = "representationDesignTitle" hidden>
+						Representation Design:
+					</div>
+					<!-- D1: size => zoom in/zoom out -->
+					<div id = "zoomInOut" hidden>
+						<div class = "title2"> 
+							SIZE:
+						</div>
+
+						<div>
+							<div id = "zoomInOut_height" class = "sliderRow">
+								<div class = "sliderLeftLabel" id = "sliderLeftLabel_sizeLabel_1">
+									<label for = "heightSlider" class = "title4" id = "sizeLabel_1">Height</label>
+								</div>
+								
+								<div class = "sliderItself" id = "sliderItself_heightSlider">
+									<input type = "range" class = "range_slider re_draw" id = "heightSlider" step = "0.1" value = "0">
+								</div>
+
+								<div class = "sliderRightLabel"></div>
+
+								<div class = "sliderResetBtn" id = "sliderFollowBtn_resetheightSlider">	
+									<input type = "button" class = "reset_btn title5" id = "reset_heightSlider" value = "RESET">
+								</div>
+
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_height_minusBtn">
+									<input type = "button" class = "plusMinus_btn title5 minus" id = "minus_height" value = "-">
+								</div>
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_height_plusBtn">
+									<input type = "button" class = "plusMinus_btn title5 plus" id = "plus_height" value = "+">
+								</div>								
+
+								<div class = "sliderFlipBtn"></div>
+							</div>
+
+							<div id = "zoomInOut_width" class = "sliderRow">
+								<div class = "sliderLeftLabel" id = "sliderLeftLabel_sizeLabel_1">
+									<label for = "widthSlider" class = "title4" id = "sizeLabel_2">Width</label>
+								</div>
+
+								<div class = "sliderItself" id = "sliderItself_heightSlider">
+									<input type = "range" class = "range_slider re_draw" id = "widthSlider" step = "0.1" value = "0">
+								</div>
+
+								<div class = "sliderRightLabel"></div>
+
+								<div class = "sliderResetBtn" id = "sliderFollowBtn_resetheightSlider">	
+									<input type = "button" class = "reset_btn title5" id = "reset_widthSlider" value = "RESET">
+								</div>
+
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_width_minusBtn">
+									<input type = "button" class = "plusMinus_btn title5 minus" id = "minus_width" value = "-">
+								</div>
+								<div class = "sliderPlusMinusBtn" id = "sliderRow_width_plusBtn">
+									<input type = "button" class = "plusMinus_btn title5 plus" id = "plus_width" value = "+">
+								</div>
+
+								<div class = "sliderFlipBtn"></div>
+							</div>
+								
+							<div id = "zoomInOut_lock" class = "sliderColunm">
+								<img id = "img_lock" class = "img_lock_clicked" title = "Click to maintain the initial height-width ratio." src = "/SwimFlow/img/png/interface/locked.png" >								
+							</div>
+						</div>
+							
+
+					</div>
+
+					<!-- D2: rotation => let visualization can be rotated from [-PI, +PI] -->
+					<div id = "rotation" hidden>
+						<div class = "title2"> 
+							ROTATION:
+						</div>
+
+						<div class = "sliderRow" id = "sliderRow_rotation">
+							<div class = "sliderLeftLabel" id = "sliderLeftLabel_rotationLabel_1">
+								<label for = "rotationSlider" class = "title4" id = "rotationLabel_1">-360</label>
+							</div>
+
+							<div class = "sliderItself" id = "sliderItself_rotationSlider">
+								<input type="range" class = "range_slider re_draw" name="rotationSlider" id = "rotationSlider" min = "-360" max = "360" step = "1" value = "0">
+							</div>
+
+							<div class = "sliderRightLabel" id = "sliderRightLabel_rotationLabel_2">
+								<label for = "rotationSlider" class = "title4" id = "rotationLabel_2">+360</label>
+							</div>
+
+							<div class = "sliderResetBtn" id = "sliderFollowBtn_reset_rotationSlider">
+								<input type = "button" class = "reset_btn title5" id = "reset_rotationSlider" value = "RESET"><br>
+							</div>
+
+
+							<div class = "sliderPlusMinusBtn" id = "sliderRow_rotation_minusBtn">
+								<input type = "button" class = "plusMinus_btn title5 minus" id = "minus_rotation" value = "-">
+							</div>
+							<div class = "sliderPlusMinusBtn" id = "sliderRow_rotation_plusBtn">
+								<input type = "button" class = "plusMinus_btn title5 plus" id = "plus_rotation" value = "+">
+							</div>
+
+							<div class = "sliderFlipBtn"></div>
+						</div>
+					</div>
+
+					<!-- D3. color + transparency: customize appearance: color and transparency per color -->
+					<div id = "color" hidden>
+						<div class = "colorDivTitle">
+							<div class = "title2" style = "width:70%">
+								COLOR:
+							</div>
+
+							<div class = "sliderResetBtn" id = "sliderFollowBtn_reset_colorSet">	
+								<input type = "button" class = "reset_btn title5" id = "reset_colorSet" value = "RESET">
+							</div>
+						</div>
+						
+						<div class = "colorBlocks" name = "color_set" id = "color_set" >
+							<!-- insert the predefined color sets according to the selected representation -->
+						</div>
+
+						<div class = "colorPicker" name = "color_picker_container" id = "color_picker_container">
+							<div class = "sliderRow" id = "sliderRow_color">
+								<div class = "colorLeftLabel" id = "sliderLeftLabel_color">
+									<label for = "color_picker" class = "title4">Change color</label>
+								</div>
+								<div class = "colorPickerItself" id = "colorPickerItself_color">
+									<input type = "color" class = "selector colorSlice" id = "color_picker" value = "#D3D3D3" title = "To modify a color, please firstly select one from above.">
+								</div>
+							</div>
+
+							<div class = "sliderRow" id = "sliderRow_tranparency">
+								<div class = "colorLeftLabel" id = "sliderLeftLabel_tranparency">
+									<label for = "transparency_slider" class = "title4">Change transparency</label>
+								</div>
+								<div class = "colorPickerItself" id = "colorPickerItself_transparency">
+									<input type = "range" class = "selector colorSlice transparencySlider" id = "transparency_slider" min = "0" max = "1" value = "1" step = "0.01" title = "Without selection, transparency will apply to all entities.">
+								</div>
+							</div>
+						</div>
+
+						<div class = "colorDivTitle">
+							<div class = "title2" style = "width:70%">
+								COLOR HISTORY:
+							</div>
+							<div class = "sliderResetBtn" id = "sliderFollowBtn_reset_colorHistory">
+								<input type = "button" class = "reset_btn title5" id = "reset_colorHistory" value = "CLEAN">
+							</div>
+						</div>
+						<div class = "colorBlocks" name = "color_history" id = "color_history">
+							<!-- insert customized color sets -->
+						</div>						
+					</div>
+
+					<!-- 7. transparency: customize appearance: transparency -->
+					<div id = "transparency" hidden>
+						<div class = "colorDivTitle">
+							<div class = "title2" style = "width:70%">
+								FLAG:
+							</div>
+							<div class = "sliderResetBtn" id = "sliderFollowBtn_reset_transparencySet">
+								<input type = "button" class = "reset_btn title5" id = "reset_transparencySet" value = "RESET">
+							</div>
+						</div>
+
+						<div class = "colorBlocks" name = "transparency_set" id = "transparency_set" >
+							<!-- insert the predefined color sets according to the selected representation -->
+						</div>
+
+						<div class = "colorPicker sliderRow" name = "transparency_picker_container" id = "transparency_picker_container">
+							<div class = "colorLeftLabel" id = "sliderLeftLabel_transparency_slider_2">
+								<label for = "transparency_slider_2" class = "title4">New transparency</label>
+							</div>
+
+							<div class = "colorPickerItself" id = "colorPickerItself_transparency_slider_2">
+								<input type = "range" class = "selector colorSlice transparencySlider" id = "transparency_slider_2" min = "0" max = "1" value = "1" step = "0.01" title = "Without selection, transparency will apply to all entities.">
+							</div>
+						</div>
+
+						<div class = "colorDivTitle">
+							<div class = "title2" style = "width:70%">
+								TRANSPARENCY HISTORY:
+							</div>
+							<div class = "sliderResetBtn" id = "sliderFollowBtn_reset_transparencyHistory">
+								<input type = "button" class = "reset_btn title5" id = "reset_transparencyHistory" value = "CLEAN">
+							</div>
+						</div>
+
+						<div class = "colorBlocks" name = "transparency_history" id = "transparency_history">
+							<!-- insert customized color sets -->
+						</div>						
+					</div>
+				</div>			
+			</div>
+			
+			
+			<!-- 4.3 add option: add current representation as a layer -->
+			<div id = "controllerFooter" class = "controllerFooter">
+				<div id = "addDataCard" class = "addDataCard">
+					<button type = "button" id = "addBtn" disabled>
+						Save Current Design to Layer
+					</button>				
+				</div>
+			</div>
+		</div>
+
+		<!-- Middle top part: logos + contact + publications -->
+		<div id = "pageHeader" class = "pageHeader myBorder">
+			<div id= "visInMotion">
+				<a href = "https://hal.inria.fr/hal-03698837/file/Vis_in_motion_A_Research_Agenda_and_Two_Evaluations.pdf" target="_blank"><img id = "vim" class = "vim" src = "/SwimFlow/img/png/logo/vim.png" alt = "logo of Visualization in Motion"></a>
+			</div>
+
+			<div id = "affiliations_buttons">
+				<div id = "affiliations">
+					<a href = "https://www.inria.fr/en" target="_blank"><img id = "inria" class = "logo" src = "/SwimFlow/img/png/logo/inria.png" alt = "logo of Inria"></a>
+					<a href = "https://www.cnrs.fr/en" target="_blank"><img id = "cnrs" class = "logo" src = "/SwimFlow/img/png/logo/cnrs.png" alt = "logo of CNRS"></a>
+					<a href = "https://www.universite-paris-saclay.fr/en" target="_blank"><img id = "ups" class = "logo" src = "/SwimFlow/img/png/logo/ups.png" alt = "logo of Université Paris-Saclay"></a>
+					<a href = "https://www.ec-lyon.fr/en" target="_blank"><img id = "ecly" class = "logo" src = "/SwimFlow/img/png/logo/ecly.png" alt = "logo of Ecole Centrale Lyon"></a>
+				</div>
+
+				<div id = "questionnaires">
+					<div id = "contactDiv" class = "questionnaireDivs">
+						<img id = "contactIcon" class = "questionnaireIcons" src = "/SwimFlow/img/png/interface/email2_3C6CA8.png">
+						<span class = "divSpan">Contact Us</span>
+					</div>
+						
+					<div id = "feedbackDiv" class = "questionnaireDivs">
+						<img id = "feedbackIcon" class = "questionnaireIcons" src = "/SwimFlow/img/png/interface/feedback_3C6CA8.png">
+						<span class = "divSpan">Give Feedback</span>							
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Middle part: video + vis  -->
+		<div id = "videovis" class = "c-video" >
+			<!-- video -->
+			<video id = "myVideo" crossorigin = "anonymous" style = "margin-top: 0px;" muted = "muted"></video>
+			<!-- controllers -->
+			<div class = "controls myBorder" id = "myVideoControllers" style="align-items: center;">				
+				<!-- play/pause button -->
+				<div id = "myButtonsContainer">
+					<button id = "playPauseButton" title = "Play/Pause"></button>
+				</div>
+
+				<!-- progress bar -->
+				<div id = "myProgressBarContainter">
+					<input type = "range" id = "myProgressBar" min = "0" max = "100" step = "0.001" value = "0.0" title = "The race starts from 13.68s (blue range).">
+				</div>
+
+				<!-- current time / duration -->
+				<div id = "myTimeStampContainer">
+					<input type="text" id = "myTimeStamp"></div>						
+				</div>
+
+			</div>	
+		</div>
+
+		<!-- Middle bottom part: buttons -->
+		<div id = "pageFooter" class = "pageFooter myBorder" >
+			<div id = "finishDiv" class = "finishDiv" hidden>
+				<img id = "finishIcon1" class = "questionnaireIcons finishIcon" src = "/SwimFlow/img/png/interface/finish_3C6CA8.png">
+				<span class = "divSpan">I finish my design</span>
+				<img id = "finishIcon2" class = "questionnaireIcons finishIcon" src = "/SwimFlow/img/png/interface/finish_3C6CA8.png">
+			</div>
+		</div>
+
+		<!-- Right part: layers -->
+		<div id = "layers" class = "myBorder title1" style = "padding: 5px; box-sizing: border-box; display: inline-block; align-items: center; align-content: center; text-align: justify; justify-content: space-around;">
+			<p style = "margin: 0px; text-align: left;">My Layers:</p>
+
+			
+			<div class = "layerGroups" name = "layerGroups" id = "layerGroups">
+				<!-- insert layer divs -->
+			</div>
+		</div>
+
+		<!-- delete confirmation -->
+		<div id = "deleteConfirmation" class = "popupDiv" hidden>
+			<div id = "dialogBox_deleteConfirmation" class = "popupDialogBox">
+				<div class = "questionSentence">Confirm to delete the current layer?</div>
+				<div style = "padding: 5% 0% 0% 0%;">
+					<button type = "button" id = "cancelDeleteBtn" class = "popupBtns darkBlueBtn">Cancel</button>
+					<button type = "button" id = "confirmDeleteBtn" class = "popupBtns lightBlueBtn">Delete</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- pop-up feedback sheet -->
+		<div id = "popupFeedback" class = "popupDiv" hidden>
+			<div id = "dialogBox_popupFeedback" class = "popupDialogBox">
+				<div class = "oneQuestion">
+					<!-- questions part -->
+					<label for = "issueText" style = "margin-block:5px;">Any comments for improvement?</label>
+					<textarea id = "issueText" rows = "5" class = "inputText"></textarea>
+				</div>
+
+				<div style = "padding: 5% 0% 0% 0%;">
+					<button type = "button" id = "continueBtn" class = "popupBtns darkBlueBtn">Save and Continue Later</button>
+					<button type = "button" id = "sendBtn" class = "popupBtns lightBlueBtn">Send</button>
+				</div>
+			</div>			
+		</div>
+
+		<!-- finish confirmation -->
+		<div id = "designConfirmation" class = "popupDiv" hidden>
+			<div id = "dialogBox_designConfirmation" class = "popupDialogBox">
+				<div class = "questionSentence">
+					Only representations that are part of a layer will be saved. </br> 
+					Would you like to add the <span id = "currentVisId"></span> representation you are currently working on to a layer of the final design? 
+				</div>
+				<div style = "padding: 5% 0% 0% 0%;">
+					<button type = "button" id = "addDesignBtn" class = "popupBtns darkBlueBtn">Yes, please add</button>
+					<button type = "button" id = "dropDesignBtn" class = "popupBtns lightBlueBtn">No, thank you</button>
+				</div>
+			</div>
+		</div>
+
+		<div id = "finishConfirmation" class = "popupDiv" hidden>
+			<div id = "dialogBox_finishConfirmation" class = "popupDialogBox">
+				<div class = "questionSentence">Do you confirm that you have finished your final design?</div>
+				<div style = "padding: 5% 0% 0% 0%;">
+					<button type = "button" id = "countinueDesignBtn" class = "popupBtns darkBlueBtn">Cancel</button>
+					<button type = "button" id = "finishDesignBtn" class = "popupBtns lightBlueBtn">Confirm</button>
+				</div>
+			</div>
+		</div>
+
+		<div id = "completeDiv" class = "popupDiv" hidden>
+			<div id = "dialogBox_completeDiv" class = "popupDialogBox">
+				<div class = "questionSentence" id = "sharableLinkDiv">
+
+					Here is the link to a non-modifiable version of your submitted design: <a class = "sharableLink" target="blank"></a>. </br>
+					
+				</div>
+				<div style = "padding: 5% 0% 0% 0%;">
+					<button type = "button" id = "closeCompleteBtn" class = "popupBtns darkBlueBtn">Close</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Bootstrap JS -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+	</body>
+</html>
+
+<script type="text/javascript" src = "js/init.js"></script>
+<script type="text/javascript" src = "js/embedding_videos_canvas.js"></script>
+<script type="text/javascript" src = "js/reading_JSON.js"></script>
+

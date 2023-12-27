@@ -1,0 +1,2 @@
+timestamp, participantId, designVersion, elementId, videoCurrentTime, currentFrameId, videoPlayStatus
+2023-12-27T18:31:07+0100,934326300673264,0,playPauseButton,13.7,685,play
