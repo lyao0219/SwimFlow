@@ -63,8 +63,8 @@ To get started, either clone this repository, or if you stay within github, use 
     └── readme.md
 ```
 
-Then, you need to download from [here](https://drive.google.com/file/d/1Wj2BNrbZehLB6RI_cpLnUtpAkrFS9y0z/view?usp=sharing), our swimming video, which is a <span style="color:red">mandatory</span> component to let *SwimFlow* work properly. 
-Please put the downloaded video under the folder /SwimFlow/video and <span style="color:red">name it as follows</span>:
+Then, you need to download from [here](https://drive.google.com/file/d/1Wj2BNrbZehLB6RI_cpLnUtpAkrFS9y0z/view?usp=sharing), our swimming video, which is a **mandatory** component to let *SwimFlow* work properly. 
+Please put the downloaded video under the folder /SwimFlow/video and **name it as follows**</span>**:
 
 ```
 └── Main directory
@@ -82,17 +82,17 @@ Next, test your codes extensively.
     ```
     http://localhost:8080/SwimFlow/index
     ```
-    in your browser (Please check if YOUR GATE NUMBER is 8080 or not. If not, replace 8080 by <span style="color:red">YOUR GATE NUMBER</span>).
+    in your browser (Please check if YOUR GATE NUMBER is 8080 or not. If not, replace 8080 by **YOUR GATE NUMBER**).
 
 * If you prefer to use a php server, please first start a php server with the main directory of the repo as the root directory (so that index.html is at the base level), and CD to the director where you can find this readme file. Then enter
     ```
     php -S localhost:8080
     ```
-    in the terminal. Same as before, change "8080" with <span style="color:red">YOUR GATE NUMBER</span>. Now please enter the link mentioned above in your browser.
+    in the terminal. Same as before, change "8080" with **YOUR GATE NUMBER**. Now please enter the link mentioned above in your browser.
 
 Now, you should be able to access and use *SwimFlow* to embed and design our own visualizations into the provided swimming video. Please note if the video was correctly downloaded, named, and put into the right place, a playing video should be able to be viewed. An example user interface image is below:
 
-<img title = "User interface example image of swimflow" alt = "An exmaple image of SwimFlow's user interface" src = "interface.gif">
+<img title = "User interface example image of swimflow" alt = "An exmaple image of SwimFlow's user interface" src = "interface.png">
 
 ## Go further
 Here, we specifically explain some key features to help you contribute according to your purpose based on our *SwimFlow*. 
