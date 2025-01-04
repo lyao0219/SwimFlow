@@ -77,7 +77,7 @@ To get started, either clone this repository, or if you stay within github, use 
 ```
 └── Main directory
     ├── SwimFlow
-    └── readme.md
+    └── README.md
 ```
 
 Then, you need to download from [here](https://drive.google.com/file/d/1Wj2BNrbZehLB6RI_cpLnUtpAkrFS9y0z/view?usp=sharing), our swimming video, which is a **mandatory** component to let *SwimFlow* work properly. 
@@ -90,7 +90,7 @@ Please put the downloaded video under the folder /SwimFlow/video and **name it a
         ├── video
             ├── 2021_Montpellier_100_brasse_birdseyes.mp4
         └── ...
-    └── readme.md
+    └── README.md
 ```
 
 Next, test your codes extensively. 
@@ -131,7 +131,7 @@ Here, we specifically explain some key features to help you contribute according
         ├── index.html <= main page
         ├── sharing.html <= the page called when sharing and advertising the final designs on social media
         └── ...
-    └── readme.md
+    └── README.md
 ```
 
 ## Updating in progress
