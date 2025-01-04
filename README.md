@@ -23,7 +23,7 @@ To cite the entire paper:
 * Lijie Yao, Romain Vuillemot, Anastasia Bezerianos, Petra Isenberg. Designing for Visualization in Motion: Embedding Visualizations in Swimming Videos. IEEE Transactions on Visualization and Computer Graphics, vol. 30, no. 3, pp. 1821-1836, March 2024. doi: [10.1109/TVCG.2022.3184993](https://doi.org/10.1109/10.1109/TVCG.2023.3341990).
 
     ```
-    @ARTICLE{YAO:2023:SwimFlow,
+    @ARTICLE{YAO:2024:Swimming,
         author = {Yao, Lijie and Vuillemot, Romain and Bezerianos, Anastasia and Isenberg, Petra},
         journal = {IEEE Transactions on Visualization and Computer Graphics}, 
         title = {Designing for Visualization in Motion: Embedding Visualizations in Swimming Videos}, 
