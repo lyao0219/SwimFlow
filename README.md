@@ -54,7 +54,7 @@ To cite the umbrella paper of the topic **Visualization in motion**:
 
 To cite the relevant paper presented at [IEEE Visualization 2024](https://ieeevis.org/year/2024/welcome) on visualization in motion with a focus on **Video Games**:
 
-* Lijie Yao, Federica Bucchieri, Victoria McArthurm Anastasia Bezerianos, Petra Isenberg. User Experience of Visualizations in Motion: A Case Study and Design Considerations. IEEE Transactions on Visualization and Computer Graphics, vol. 31, no. 1, pp. 174-184, 1 Jan. 2025, doi: [1109/TVCG.2024.34563193](https://doi.org/1109/TVCG.2024.3456319).
+* Lijie Yao, Federica Bucchieri, Victoria McArthur, Anastasia Bezerianos, Petra Isenberg. User Experience of Visualizations in Motion: A Case Study and Design Considerations. IEEE Transactions on Visualization and Computer Graphics, vol. 31, no. 1, pp. 174-184, 1 Jan. 2025, doi: [1109/TVCG.2024.34563193](https://doi.org/1109/TVCG.2024.3456319).
 
     ```
     @ARTICLE{YAO:2025:VideoGame,
