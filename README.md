@@ -27,10 +27,10 @@ To cite the entire paper:
         author = {Yao, Lijie and Vuillemot, Romain and Bezerianos, Anastasia and Isenberg, Petra},
         journal = {IEEE Transactions on Visualization and Computer Graphics}, 
         title = {Designing for Visualization in Motion: Embedding Visualizations in Swimming Videos}, 
-        year = {2023},
-        volume = {},
-        number = {},
-        pages = {1--16},
+        year = {2024},
+        volume = {30},
+        number = {3},
+        pages = {1821--1836},
         doi = {10.1109/TVCG.2023.3341990}
     }
     ```
