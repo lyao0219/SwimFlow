@@ -1,6 +1,6 @@
 # Visualization in motion - *SwimFlow*
 
-This is a repository for original codes of a technology probe, *SwimFlow*, provided  in the paper ["Designing for Visualization in Motion: Embedding Visualizations in Swimming Videos"](https://doi.org/10.1109/TVCG.2023.3341990), published at [IEEE Transactions of Visualization and Computer Graphics](https://www.computer.org/csdl/journal/tg), and will be presented at [IEEE Visualization 2024](https://ieeevis.org/year/2024/welcome).
+This is a repository for original codes of a technology probe, *SwimFlow*, provided  in the paper ["Designing for Visualization in Motion: Embedding Visualizations in Swimming Videos"](https://doi.org/10.1109/TVCG.2023.3341990), published at [IEEE Transactions of Visualization and Computer Graphics](https://www.computer.org/csdl/journal/tg), and was presented at [IEEE Visualization 2024](https://ieeevis.org/year/2024/welcome).
 *SwimFlow* allows users to embed visualizations into a swimming video and enable visualizations moving along with the real tracking data of swimmers, an online interactive version can be accessed at https://motion.isenberg.cc/Swimming/index.
 
 If you use *SwimFlow* and our results on **Visualization in motion** in new projects or use it in a different way, we would appreciate a citation:
@@ -49,6 +49,23 @@ To cite the umbrella paper of the topic **Visualization in motion**:
         number={10},
         pages={3546--3562},
         doi={10.1109/TVCG.2022.3184993}
+    }
+    ```
+
+To cite the relevant paper presented at [IEEE Visualization 2024](https://ieeevis.org/year/2024/welcome) on visualization in motion with a focus on **Video Games**:
+
+* Lijie Yao, Federica Bucchieri, Victoria McArthurm Anastasia Bezerianos, Petra Isenberg. User Experience of Visualizations in Motion: A Case Study and Design Considerations. IEEE Transactions on Visualization and Computer Graphics, vol. 31, no. 1, pp. 174-184, 1 Jan. 2025, doi: [1109/TVCG.2024.34563193](https://doi.org/1109/TVCG.2024.3456319).
+
+    ```
+    @ARTICLE{YAO:2025:VideoGame,
+        author={Yao, Lijie and Bucchieri, Federica and McArthur, Victoria and Bezerianos, Anastasia and Isenberg, Petra},
+        journal={IEEE Transactions on Visualization and Computer Graphics}, 
+        title={User Experience of Visualizations in Motion: A Case Study and Design Considerations}, 
+        year={2025},
+        volume={31},
+        number={1},
+        pages={174--184},
+        doi={10.1109/TVCG.2024.3456319}
     }
     ```
 
