@@ -1,6 +1,6 @@
 # Visualization in motion - *SwimFlow*
 
-This is a repository for original codes of a technology probe, *SwimFlow*, provided  in the paper ["Designing for Visualization in Motion: Embedding Visualizations in Swimming Videos"](https://doi.org/10.1109/TVCG.2023.3341990), published at [IEEE Transactions of Visualization and Computer Graphics](https://www.computer.org/csdl/journal/tg), and was presented at [IEEE Visualization 2024](https://ieeevis.org/year/2024/welcome).
+This is a repository for original codes of a technology probe, *SwimFlow*, provided  in the paper ["Designing for Visualization in Motion: Embedding Visualizations in Swimming Videos"](https://doi.org/10.1109/TVCG.2023.3341990), published at [IEEE Transactions of Visualization and Computer Graphics](https://www.computer.org/csdl/journal/tg) and presented at [IEEE Visualization 2024](https://ieeevis.org/year/2024/welcome).
 *SwimFlow* allows users to embed visualizations into a swimming video and enable visualizations moving along with the real tracking data of swimmers, an online interactive version can be accessed at https://motion.isenberg.cc/Swimming/index.
 
 If you use *SwimFlow* and our results on **Visualization in motion** in new projects or use it in a different way, we would appreciate a citation:
