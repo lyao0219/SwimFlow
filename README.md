@@ -83,7 +83,7 @@ To read more on **Visualization in Motion**:
 
 ## Getting started
 
-To get started, either clone this repository, or if you stay within github, use the ''use this template'' function to generate your own version of this repository from which you can then edit. You will see the project hierachgy as follows:
+To get started, either clone this repository or if you stay within Github, use the ''use this template'' function to generate your own version of this repository from which you can then edit. You will see the project hierarchy as follows:
 
 ```
 └── Main directory
