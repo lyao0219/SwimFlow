@@ -69,6 +69,17 @@ To cite the relevant paper presented at [IEEE Visualization 2024](https://ieeevi
     }
     ```
 
+To read more on **Visualization in Motion**:
+
+1. **The positioning paper**: Lijie Yao, Anastasia Bezerianos, Romain Vuillemot and Petra Isenberg, "Visualization in Motion: A Research Agenda and Two Evaluations," in IEEE Transactions on Visualization and Computer Graphics, vol. 28, no. 10, pp. 3546-3562, 1 Oct. 2022, doi: [10.1109/TVCG.2022.3184993](https://doi.org/10.1109/TVCG.2022.3184993/). Link: [Author version](https://lijieyao.com/assets/pdf/Vis_in_motion_A_Research_Agenda_and_Two_Evaluations.pdf )
+
+2. **With a focus on swimming**: Lijie Yao, Romain Vuillemot, Anastasia Bezerianos and Petra Isenberg, "Designing for Visualization in Motion: Embedding Visualizations in Swimming Videos," in IEEE Transactions on Visualization and Computer Graphics, vol. 30, no. 3, pp. 1821-1836, March 2024, doi: [10.1109/TVCG.2023.3341990](https://doi.org/10.1109/TVCG.2023.3341990). Link: [Author version](https://lijieyao.com/assets/pdf/Situated_Visualization_in_Motion.pdf).
+
+3. **With a focus on video games**: Lijie Yao, Federica Bucchieri, Victoria McArthur, Anastasia Bezerianos and Petra Isenberg, "User Experience of Visualizations in Motion: A Case Study and Design Considerations," in IEEE Transactions on Visualization and Computer Graphics, vol. 31, no. 1, pp. 174-184, Jan. 2025, doi: [10.1109/TVCG.2024.3456319](https://doi.org/10.1109/TVCG.2024.3456319). Link: [Author version](https://lijieyao.com/assets/pdf/User_Experience_of_Visualizations_in_Motion_A_Case_Study_and_Design_Considerations.pdf).
+
+4. **A short summarization**: Lijie Yao. Situated Visualization in Motion. IEEE Computer Graphics and Applications. In press. doi: [10.1109/MCG.2024.3462129](https://doi.org/10.1109/MCG.2024.3462129). Link: [Author version](https://lijieyao.com/assets/pdf/Situated_Visualization_in_Motion.pdf). 
+
+5. **Awarded dissertation**: Lijie Yao. Situated Visualization in Motion. Human-Computer Interaction [cs.HC]. Université Paris-Saclay, 2023. English. NNT: 2023UPASG093. URL: [Author version](https://theses.hal.science/tel-04413122).
 
 ## Getting started
 
