@@ -79,7 +79,7 @@ To read more on **Visualization in Motion**:
 
 4. **A short summarization**: Lijie Yao. Situated Visualization in Motion. IEEE Computer Graphics and Applications. In press. doi: [10.1109/MCG.2024.3462129](https://doi.org/10.1109/MCG.2024.3462129). Link: [Author version](https://lijieyao.com/assets/pdf/Situated_Visualization_in_Motion.pdf). 
 
-5. **Awarded dissertation**: Lijie Yao. Situated Visualization in Motion. Human-Computer Interaction [cs.HC]. Université Paris-Saclay, 2023. English. NNT: [2023UPASG093](https://theses.hal.science/tel-04413122). URL: [Author version](https://lijieyao.com/assets/pdf/Lijie_PhD_Thesis.pdf).
+5. **Awarded dissertation**: Lijie Yao. Situated Visualization in Motion. Human-Computer Interaction [cs.HC]. Université Paris-Saclay, 2023. English. NNT: [2023UPASG093](https://theses.hal.science/tel-04413122). Link: [Author version](https://lijieyao.com/assets/pdf/Lijie_PhD_Thesis.pdf).
 
 ## Getting started
 
