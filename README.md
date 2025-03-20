@@ -5,7 +5,7 @@ This is a repository for original codes of a technology probe, *SwimFlow*, provi
 
 If you use *SwimFlow* and our results on **Visualization in motion** in new projects or use it in a different way, we would appreciate a citation:
 
-*SwimFlow* is released under [CC-BY 4.0 license](https://creativecommons.org/licenses/by/4.0/), to cite *SwimFlow* as a single tool: 
+*SwimFlow* is released under [MIT LICENSE](https://opensource.org/license/mit), to cite *SwimFlow* as a single tool: 
 
 * [*SwimFlow*](https://motion.isenberg.cc/Swimming/index), created by AVIZ, Inria in 2023.
 
